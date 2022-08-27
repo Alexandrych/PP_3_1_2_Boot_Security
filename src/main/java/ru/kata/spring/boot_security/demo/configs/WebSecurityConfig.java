@@ -6,7 +6,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Configuration
