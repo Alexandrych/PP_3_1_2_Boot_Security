@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body bgcolor="#EEEEEE">
+<a href="/">Главная</a> / <a href="user">Ваша страница</a> / <a href="logout">Выйти</a>
+<hr>
+<h1><font color="#212529"><div th:replace="fragments/indexFragment :: indexFragmentName"></div>, добро пожаловать на страницу админа!</font></h1>
+
+<table border="1" bgcolor="#CCCCCC">
+    <col width="40">
+    <col width="100">
+    <col width="150">
+    <col width="150">
+    <col width="50">
+    <col width="120">
+    <col width="70">
+    <col width="70">
+    <tr>
+        <th style="background: #B0B28E">ID</th>
+        <th style="background: #4879C5">Логин</th>
+        <th style="background: #c57948">Имя</th>
+        <th style="background: #c57948">Фамилия</th>
+        <th style="background: #c57948">Возраст</th>
+        <th style="background: #c57948">Роли</th>
+        <th/><th/>
+    </tr>
+    <tr th:each="user : ${usersList}">
+        <td> <a th:href="@{/user/{userId}(userId=${user.id})}"><th:block th:text="${user.getId()}"></th:block></a></td>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+        <td th:text="${user.getSecondName()}"></td>
+        <td th:text="${user.getAge()}"></td>
+        <td th:text="${#strings.substring(user.getAuthorities(), 1, #strings.length(user.getAuthorities())-1)}"></td>
+
+        <td><form th:method="DELETE" th:action="@{/admin/{id}/delete(id=${user.getId()})}">
+            <input type="submit" value="Удалить"/>
+        </form></td>
+
+        <td><a th:href="@{/admin/{id}/edit(id=${user.id})}">Изменить</a></td>
+    </tr>
+</table>
+
+<font color="#212529">
+    <h1>Добавить пользователя:</h1>
+
+    <form th:method="POST" th:action="@{/admin}" th:object="${modelUser}">
+
+        <label for="username">Логин: </label>
+        <input type="text" th:field="*{username}" id="username"/>
+        <div style="color:red" th:errors="*{username}">Name error</div>
+        <br>
+
+        <label for="password">Пароль: </label>
+        <input type="text" th:field="*{password}" id="password"/>
+        <div style="color:red" th:errors="*{password}">Name error</div>
+        <br>
+
+        <label for="firstName">Имя: </label>
+        <input type="text" th:field="*{firstName}" id="firstName"/>
+        <div style="color:red" th:errors="*{firstName}">Name error</div>
+        <br>
+
+        <label for="secondName">Фамилия: </label>
+        <input type="text" th:field="*{secondName}" id="secondName"/>
+        <div style="color:red" th:errors="*{secondName}">Name error</div>
+        <br>
+
+        <label for="age">Возраст: </label>
+        <input type="text" th:field="*{age}" id="age"/>
+        <div style="color:red" th:errors="*{age}">Name error</div>
+        <br>
+
+        <label for="role">Роли: </label>
+        <th:block th:each="role: ${rolesList}">
+        <input type="checkbox" th:field="*{roles}" th:text="${#strings.substring(role.role, 5)}" th:value="${role.id}" id="role"/>
+        </th:block>
+        <br>
+
+        <input type="submit" value="Добавить"/>
+
+    </form>
+    <hr>
+    <em>Alexandrych 2022</em>
+</font>
+
+</body>
+
+</body>
+</html>

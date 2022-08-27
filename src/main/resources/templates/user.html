@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Spring Security Example</title>
 </head>
-<body>
-<h1>User, welcome spring boot security page!</h1>
+<body bgcolor="#EEEEEE"><font color="#212529">
 
+<a href="/">Главная</a> / <div th:replace="fragments/indexFragment :: indexFragmentAdmin"></div><a href="logout">Выйти</a>
+    <hr>
+<h1><span th:text="${yourPage}"></span></h1>
 
-</body>
+    <table border="2" bgcolor="CCCCCC">
+        <col width="40">
+        <col width="100">
+        <col width="150">
+        <col width="150">
+        <col width="50">
+        <col width="120">
+        <tr>
+            <th style="background: #B0B28E">ID</th>
+            <th style="background: #4879C5">Логин</th>
+            <th style="background: #c57948">Имя</th>
+            <th style="background: #c57948">Фамилия</th>
+            <th style="background: #c57948">Возраст</th>
+            <th style="background: #c57948">Роли</th>
+        </tr>
+        <tr>
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getFirstName()}"></td>
+            <td th:text="${user.getSecondName()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td th:text="${#strings.substring(user.getAuthorities(), 1, #strings.length(user.getAuthorities())-1)}"></td>
+        </tr>
+    </table>
+
+    <hr>
+    <em>Alexandrych 2022</em>
+
+</font></body>
 </html>

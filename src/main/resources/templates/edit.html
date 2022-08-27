@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение данных пользователя</title>
+</head>
+<body bgcolor="#EEEEEE">
+<a href="/">Главная</a> / <a href="/admin">Назад</a> / <a href="/logout">Выйти</a>
+<hr>
+<h1><font color="#212529">Изменение данных пользователя:</font></h1>
+
+<font color="#212529">
+
+<form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
+
+    <label for="username">Логин: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <div style="color:red" th:errors="*{username}">Name error</div>
+    <br>
+
+    <label for="password">Пароль: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <div style="color:red" th:errors="*{password}">Name error</div>
+    <br>
+
+    <label for="firstName">Имя: </label>
+    <input type="text" th:field="*{firstName}" id="firstName"/>
+    <div style="color:red" th:errors="*{firstName}">Name error</div>
+    <br>
+
+    <label for="secondName">Фамилия: </label>
+    <input type="text" th:field="*{secondName}" id="secondName"/>
+    <div style="color:red" th:errors="*{secondName}">Name error</div>
+    <br>
+
+    <label for="age">Возраст: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <div style="color:red" th:errors="*{age}">Name error</div>
+    <br>
+
+    <label for="role">Роли: </label>
+    <th:block th:each="role: ${rolesList}">
+        <input type="checkbox" th:field="*{roles}" th:text="${#strings.substring(role.role, 5)}" th:value="${role.id}" id="role"/>
+    </th:block>
+    <br>
+
+    <input type="submit" value="Изменить"/>
+</form>
+
+    <hr>
+    <em>Alexandrych 2022</em>
+
+</font>
+
+</body>
+</html>

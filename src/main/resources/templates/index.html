@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title>Добро пожаловать!</title>
 </head>
-<body>
-<h1>Welcome to Index PAGE!</h1>
+
+<body bgcolor="#EEEEEE"><font color="#212529">
 
 
+    <a href="/">Главная</a> / <span th:replace="fragments/indexFragment :: indexFragment"></span>
+
+    <h1>Добро пожаловать, <span th:replace="fragments/indexFragment :: indexFragmentName"></span>!</h1>
+
+    Пользователей в БД: <h1 th:text="${count}"></h1>
+
+    <hr>
+    <em>Alexandrych 2022</em>
+</font>
 </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<span th:fragment="indexFragment">
+  <span sec:authorize = "isAuthenticated()">
+
+    <span sec:authorize = "hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+      <a href="/user">Ваша страница</a> /
+    </span>
+
+    <span sec:authorize = "hasRole('ROLE_ADMIN')">
+      <a href="/admin">Страница админа</a> /
+    </span>
+
+    <a href="/logout">Выйти</a>
+
+  </span>
+    <span sec:authorize = "isAnonymous()">
+      <a href="/login">Войти</a>
+    </span>
+
+    <hr>
+</span>
+
+
+<span th:fragment="indexFragmentName">
+  <span sec:authorize = "isAnonymous()">Аноним
+  </span>
+
+  <span sec:authorize = "isAuthenticated()">
+    <span sec:authentication="principal.username">
+    </span>
+  </span>
+</span>
+
+
+<span th:fragment="indexFragmentAdmin">
+  <span sec:authorize = "hasRole('ROLE_ADMIN')">
+    <a href="/admin">Страница админа</a> /
+  </span>
+</span>
+
+</body>
+
+</html>
