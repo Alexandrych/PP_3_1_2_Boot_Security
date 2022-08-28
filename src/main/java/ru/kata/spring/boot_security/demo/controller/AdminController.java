@@ -51,7 +51,10 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String updateUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult,
+                             Model model) {
+        model.addAttribute("rolesList", userService.getRoles());
         return userService.updateUser(user, bindingResult);
     }
 }
