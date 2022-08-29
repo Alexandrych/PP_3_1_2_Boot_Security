@@ -36,7 +36,6 @@ public class User implements UserDetails {
     private byte age;
 
     @ManyToMany
-    @Fetch(FetchMode.JOIN)
     private Set<UserRole> roles = new HashSet<>();
 
     public User() {
